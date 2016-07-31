@@ -187,8 +187,6 @@ class LoD(cmd.Cmd):
             self.british_release_regulars = 6
             self.british_release_tories = 6
 
-            self.ToA_Played = True
-
     def mapsetup(self):
         print ""
         print 'Running mapsetup: %s' % self.scenario
@@ -476,7 +474,7 @@ class LoD(cmd.Cmd):
 
                     for country in self.map:
                         rebellion_cubes = int(self.map[country].patriot_continental) + int(self.map[country].french_regular)
-                        if int(self.map[country].patriot_washington) == True:
+                        if int(self.map[country].patriot_washington) == 1:
                             rebellion_cubes += 1
 
                         british_pieces = int(self.map[country].british_tories) + int(self.map[country].british_regular) + int(self.map[country].british_fort)
@@ -790,96 +788,44 @@ class LoD(cmd.Cmd):
         print ""
         print "SKIRMISH"
 
-        if self.map["WI"].is_muster == False and self.map["WI"].is_battle == False and self.map["WI"].french_regular > 0 and (self.map["WI"].british_regular > 0 or self.map["WI"].british_tories > 0 or self.map["WI"].british_fort > 0):
+        if self.map["WI"].is_muster == False and self.map["WI"].is_battle == False and self.map["WI"].french_regular > 0 and (self.map["WI"].british_regular + self.map["WI"].british_tories) > 0:
             print "Skirmish in WI"
-            if self.map["WI"].british_fort > 0:
+            print "WI Stats are as follows: %s" % self.map["WI"].is_muster
+            print "WI Is Battle %s" % self.map["WI"].is_battle
+            print "WI French Regular count %s" % self.map["WI"].french_regular
+            print "WI British Regular count %s" % self.map["WI"].british_regular
+            print "WI British Tories count %s" % self.map["WI"].british_tories
+            print "WI British Fort count %s" % self.map["WI"].british_fort
+
+            print "Enter number(s) using the following rules:"
+            print "1) Remove one British Fort, or"
+            print "2) Remove as many British cubes as possible"
+            print "WI has British Forts: %s, British Regular: %s, British Tory: %s" % (self.map["WI"].british_fort, self.map["WI"].british_regular, self.map["WI"].british_tories)
+            print ""
+
+            british_fort = raw_input("Enter '1', if 1 British Fort can be removed, else 0:")
+
+            if british_fort == 1:
                 self.map["WI"].british_fort -= 1
-                self.map["WI"].french_regular -= 1
                 self.british_forts_casualty += 1
-                self.french_regular_casualty += 1
+
                 print "Resource and Map updated"
-                print "ACTION: Remove 1 Britsh Fort from WI, place into Casulaties"
-                print "ACTION: Remove 1 French Regular from WI, place into Casulaties"
-
-            elif self.map["WI"].british_regular + self.map["WI"].british_tories >= 2:
-                if self.map["WI"].british_regular < self.map["WI"].british_tories:
-                    if self.map["WI"].british_regular > 0:
-                        self.map["WI"].british_regular -= 1
-                        self.british_regular_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Regular from WI, place into Casulaties"
-                    else:
-                        self.map["WI"].british_tories -= 1
-                        self.british_torie_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Tory from WI, place into Casulaties"
-
-                    if self.map["WI"].british_tories > 0:
-                        self.map["WI"].british_tories -= 1
-                        self.british_torie_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Tory from WI, place into Casulaties"
-                    else:
-                        self.map["WI"].british_regular -= 1
-                        self.british_regular_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Regular from WI, place into Casulaties"
-
-                    self.map["WI"].french_regular -= 1
-                    self.french_regular_casualty += 1
-                    print "Resource and Map updated"
-                    print "ACTION: Remove 1 French Regular from WI, place into Casulaties"
-
-                else:
-                    if self.map["WI"].british_tories > 0:
-                        self.map["WI"].british_tories -= 1
-                        self.british_torie_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Tory from WI, place into Casulaties"
-                    else:
-                        self.map["WI"].british_regular -= 1
-                        self.british_regular_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Regular from WI, place into Casulaties"
-
-                    if self.map["WI"].british_regular > 0:
-                        self.map["WI"].british_regular -= 1
-                        self.british_regular_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Regular from WI, place into Casulaties"
-                    else:
-                        self.map["WI"].british_tories -= 1
-                        self.british_torie_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Tory from WI, place into Casulaties"
-
-                    self.map["WI"].french_regular -= 1
-                    self.french_regular_casualty += 1
-                    print "Resource and Map updated"
-                    print "ACTION: Remove 1 French Regular from WI, place into Casulaties"
-
-            elif self.map["WI"].british_regular + self.map["WI"].british_tories == 1:
-                if self.map["WI"].british_regular < self.map["WI"].british_tories:
-                    if self.map["WI"].british_regular > 0:
-                        self.map["WI"].british_regular -= 1
-                        self.british_regular_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Regular from WI, place into Casulaties"
-                    else:
-                        self.map["WI"].british_tories -= 1
-                        self.british_torie_casualty += 1
-                        print "Resource and Map updated"
-                        print "ACTION: Remove 1 British Tory from WI, place into Casulaties"
-
-                    self.map["WI"].french_regular -= 1
-                    self.french_regular_casualty += 1
-                    print "Resource and Map updated"
-                    print "ACTION: Remove 1 French Regular from WI, place into Casulaties"
+                print "ACTION: Remove 1 British Fort from 'WI', place into Casulaties"
+            else:
+                british_regular = raw_input("Enter number of British Regular Cubes to remove:")
+                british_tory = raw_input("Enter number of British Tory Cubes to remove:")
+                self.map["WI"].british_regular -= int(british_regular)
+                self.british_regular_casualty += int(british_regular)
+                self.map["WI"].british_tories -= int(british_tory)
+                self.british_torie_casualty += int(british_tory)
+                print ""
+                print "Resource and Map updated"
+                print "ACTION: Remove %s British Regular from 'WI', place into Casulaties" % (british_regular)
+                print "ACTION: Remove %s British Tory from 'WI', place into Casulaties" % (british_tory)
 
         else:   # unable to use WI, find somewhere else.
             print "Unable to Skirmish in WI"
             print "WI Stats were as follows: %s" % self.map["WI"].is_muster
-
             print "WI Is Battle %s" % self.map["WI"].is_battle
             print "WI French Regular count %s" % self.map["WI"].french_regular
             print "WI British Regular count %s" % self.map["WI"].british_regular
@@ -894,32 +840,33 @@ class LoD(cmd.Cmd):
                 print "No available location...."
                 print "....PREPARER la GUERRE"
                 self.preparer_la_guerre()
-            else
+            else:
                 print ""
                 print "Enter number(s) using the following rules:"
-                print "Remove one British Fort, or"
-                print "Remove as many British cubes as possible"
+                print "1) Remove one British Fort, or"
+                print "2) Remove as many British cubes as possible"
+                print "%s has British Forts: %s, British Regular: %s, British Tory: %s" % (location, self.map[location].british_fort, self.map[location].british_regular, self.map[location].british_tories)
+                print ""
 
-                british_fort = raw_input("Enter '1', if 1 British Fort can be removed, else 0")
+                british_fort = raw_input("Enter '1', if 1 British Fort can be removed, else 0:")
 
                 if british_fort == 1:
                     self.map[location].british_fort -= 1
-                    self.british_forts_casualty +=1
+                    self.british_forts_casualty += 1
 
                     print "Resource and Map updated"
                     print "ACTION: Remove 1 British Fort from '%s', place into Casulaties" % location
                 else:
                     british_regular = raw_input("Enter number of British Regular Cubes to remove:")
                     british_tory = raw_input("Enter number of British Tory Cubes to remove:")
-                    self.map[location].british_regular -= british_regular
-                    self.british_forts_casualty += british_regular
-                    self.map[location].british_tories -= british_tory
-                    self.british_torie_casualty += british_tory
+                    self.map[location].british_regular -= int(british_regular)
+                    self.british_regular_casualty += int(british_regular)
+                    self.map[location].british_tories -= int(british_tory)
+                    self.british_torie_casualty += int(british_tory)
                     print ""
                     print "Resource and Map updated"
-                    print "ACTION: Remove %s British Regular from '%s', place into Casulaties" % (british_regular,location)
-                    print "ACTION: Remove %s British Tory from '%s', place into Casulaties" % (british_tory,location)
-
+                    print "ACTION: Remove %s British Regular from '%s', place into Casulaties" % (british_regular, location)
+                    print "ACTION: Remove %s British Tory from '%s', place into Casulaties" % (british_tory, location)
 
     def french_naval_pressure(self):
 
@@ -978,7 +925,7 @@ class LoD(cmd.Cmd):
 
         print ""
         print "Manually resolve all Battles."
-        print "update using 'map' for all movements manually"
+        print "Update using 'map' for all movements manually"
 
         option = raw_input("Enter choice: [map] or if none then [M]arch:")
 
