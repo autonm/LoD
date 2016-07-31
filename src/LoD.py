@@ -1029,7 +1029,7 @@ def main():
                 raise
         except:
             print "Scenario Selection error"
-            print "Test"
+            print "Test3"
 
     app = LoD(scenario)
 
