@@ -151,6 +151,7 @@ class LoD(cmd.Cmd):
         print 'Running scenariosetup: %s' % self.scenario
         if self.scenario == 1:
             self.campaign = 1
+
         elif self.scenario == 2:
             self.campaign = 1
             self.yearfrom = 1776
@@ -197,6 +198,7 @@ class LoD(cmd.Cmd):
         print 'Running mapsetup: %s' % self.scenario
         if self.scenario == 1:
             self.scenario = 1
+
         elif self.scenario == 2:
             self.map["QC"] = Country(self, "Quebec City", "British Control", -1, 1, 1, 0, False, 0, 0, 0, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
             self.map["B"] = Country(self, "Boston", "Uncontrolled", 1, 0, 0, 0, False, 0, 0, 0, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
@@ -270,14 +272,18 @@ class LoD(cmd.Cmd):
                     possible = []
                     possible.append(country)
                     break
+
                 elif rest.lower() in country.lower():
                     possible.append(country)
+
             if len(possible) == 0:
                 print "Unrecognized country."
                 print ""
+
             elif len(possible) > 1:
                 print "Be more specific", possible
                 print ""
+
             else:
                 goodcountry = possible[0]
 
@@ -640,7 +646,10 @@ class LoD(cmd.Cmd):
             else:
                 self.roderigue_hortalez()
                 if self.pass_turn == False:
-                    self.preparer_la_guerre()
+                    special = raw_input("Play Special Activity PREPARER la GUERRE ? [Y/N]")
+                    if special.lower() == "y":
+                        self.preparer_la_guerre()
+
         except:
             print "Incorrect Action"
 
@@ -652,8 +661,8 @@ class LoD(cmd.Cmd):
             if self.french_resources > 0:
                 print "Roll 1D3 for French Resources ('%s') to be added to Patriot Resources ('%s'):" % (self.french_resources, self.patriot_resources)
                 roll = int(input("ACTION: Enter 1D3 result:"))
-                if roll > self.patriot_resources:
-                    print "Roll of %s was greater than available Patriot Resources. %s will be added" % roll, self.patriot_resources
+                if roll > self.french_resources:
+                    print "Roll of %s was greater than available French Resources. %s will be added" % roll, self.french_resources
                     roll = self.patriot_resources
 
                 self.patriot_resources += roll
@@ -662,10 +671,6 @@ class LoD(cmd.Cmd):
                 print "Resources updated"
                 print "ACTION: Amend French Resources to '%s', Patriot Resources to '%s'" % (self.french_resources, self.patriot_resources)
                 print ""
-
-                special = raw_input("Play Special Activity PREPARER la GUERRE? [Y/N]")
-                if special.lower() == "y":
-                    self.preparer_la_guerre()
 
             else:
                 print "French PASS as resources = 0"
@@ -686,8 +691,8 @@ class LoD(cmd.Cmd):
 
                 print "ACTION: Move 1 French Squadron to West Indies"
                 print ""
-            elif self.french_regular_unavailable > 0:
 
+            elif self.french_regular_unavailable > 0:
                     roll = input("ACTION: Enter number of French Regular Unavailable (max 3 or '%s') to move to Available :" % self.french_regular_unavailable )
 
                     self.french_regular_available += roll
@@ -720,6 +725,7 @@ class LoD(cmd.Cmd):
 
                         self.french_regular_available += count
                         self.french_regular_unavailable -= count
+
                     elif self.french_regular_unavailable == 0 and self.french_resources == 0:
                         print ""
                         print "NO REGULARS OR BLOCKADES MOVED AND FRENCH RESOURCES = 0"
@@ -948,8 +954,10 @@ class LoD(cmd.Cmd):
 
         if option.lower() == "s":
             self.french_skirmish()
+
         elif option.lower() == "p":
             self.preparer_la_guerre()
+
         else:
             self.french_naval_pressure_loop = True
             self.french_naval_pressure()
