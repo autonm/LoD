@@ -195,10 +195,10 @@ class LoD(cmd.Cmd):
         elif self.scenario == 2:
             self.map["QC"] = Country(self, "Quebec City", "British Control", -1, 1, 1, 0, False, 0, 0, 0, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
             self.map["B"] = Country(self, "Boston", "Uncontrolled", 1, 0, 0, 0, False, 0, 0, 0, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
-            self.map["NYC"] = Country(self, "New York City", "British Control", -1, 6, 0, 0, True, 1, 0, 0, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
+            self.map["NYC"] = Country(self, "New York City", "British Control", -1, 6, 0, 1, True, 1, 0, 0, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
             self.map["PHIL"] = Country(self, "Philadelphia", "Rebellion Control", 0, 0, 0, 0, False, 0, 1, 0, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
             self.map["CT"] = Country(self, "Charles Town", "Rebellion Control", 0, 0, 0, 0, False, 2, 0, 1, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
-            self.map["Q"] = Country(self, "Quebec", "British Control", 0, 1, 1, 1, False, 0, 1, 0, 0, False, 0, 0, 0, False, 0, 0, False, False, 0)
+            self.map["Q"] = Country(self, "Quebec", "British Control", 0, 1, 1, 1, False, 0, 1, 0, 0, False, 1, 1, 0, False, 0, 0, False, False, 0)
             self.map["NW"] = Country(self, "Northwest", "Uncontrolled", 0, 0, 0, 0, False, 0, 0, 0, 0, False, 1, 0, 0, False, 0, 0, False, False, 0)
             self.map["SW"] = Country(self, "Southwest", "Uncontrolled", 0, 0, 0, 0, False, 0, 0, 0, 0, False, 1, 1, 0, False, 0, 0, False, False, 0)
             self.map["F"] = Country(self, "Florida", "British Control", 0, 1, 0, 1, False, 0, 0, 0, 0, False, 2, 0, 0, False, 0, 0, False, False, 0)
