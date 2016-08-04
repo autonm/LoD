@@ -125,7 +125,7 @@ class LoD(cmd.Cmd):
         self.map = {}
         self.mapsetup()
 
-        print "french_flow, map, toa, map, status [country], status scenario, status"
+        print "french_flow, map, toa, fni, map, status [country], status scenario, status"
         print ""
         self.prompt = "Command: "
 
@@ -359,6 +359,10 @@ class LoD(cmd.Cmd):
         print "status [country] - status display of single country."
         print "status scenario - display scenario information."
         print ""
+
+    def do_fni(self,rest):
+        print ""
+        self.fni_level = raw_input("FNI Level [" + str(self.fni_level) + "] Change to [0-3] ? ")
 
     def do_toa(self,rest):
         print ""
