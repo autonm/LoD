@@ -536,7 +536,7 @@ class LoD(cmd.Cmd):
                         royalist_count = int(self.map["QC"].british_tories) + int(self.map["QC"].british_regular) + int(self.map["QC"].british_fort)
                         royalist_count += int(self.map["QC"].indian_war_party) + int(self.map["QC"].indian_village) + int(self.map["QC"].indian_war_party_active)
 
-                        patriot_count = self.map["QC"].patriot_militia + self.map["QC"].patriot_fort + self.map["QC"].patriot_continental + int(self.map["QC"].patriot_militia_active)
+                        patriot_count = int(self.map["QC"].patriot_militia) + int(self.map["QC"].patriot_fort) + int(self.map["QC"].patriot_continental) + int(self.map["QC"].patriot_militia_active)
                         print "Quebec Rebellion (Patriot & French) combined = %s" % rebellion_count
                         print "Quebec Royalist (British & Indian) combined = %s" % royalist_count
 
@@ -558,7 +558,7 @@ class LoD(cmd.Cmd):
                         royalist_count = int(self.map["NY"].british_tories) + int(self.map["NY"].british_regular) + int(self.map["NY"].british_fort)
                         royalist_count += int(self.map["NY"].indian_war_party) + int(self.map["NY"].indian_village) + int(self.map["NY"].indian_war_party_active)
 
-                        patriot_count = self.map["NY"].patriot_militia + self.map["NY"].patriot_fort + self.map["NY"].patriot_continental + int(self.map["NY"].patriot_militia_active)
+                        patriot_count = int(self.map["NY"].patriot_militia) + int(self.map["NY"].patriot_fort) + int(self.map["NY"].patriot_continental) + int(self.map["NY"].patriot_militia_active)
                         print "New York Rebellion (Patriot & French) combined = %s" % rebellion_count
                         print "New York Royalist (British & Indian) combined = %s" % royalist_count
 
@@ -580,7 +580,7 @@ class LoD(cmd.Cmd):
                         royalist_count = int(self.map["NH"].british_tories) + int(self.map["NH"].british_regular) + int(self.map["NH"].british_fort)
                         royalist_count += int(self.map["NH"].indian_war_party) + int(self.map["NH"].indian_village) + int(self.map["NH"].indian_war_party_active)
 
-                        patriot_count = self.map["NH"].patriot_militia + self.map["NH"].patriot_fort + self.map["NH"].patriot_continental + int(self.map["NH"].patriot_militia_active)
+                        patriot_count = int(self.map["NH"].patriot_militia) + int(self.map["NH"].patriot_fort) + int(self.map["NH"].patriot_continental) + int(self.map["NH"].patriot_militia_active)
                         print "New Hampshire Rebellion (Patriot & French) combined = %s" % rebellion_count
                         print "New Hampshire (British & Indian) combined = %s" % royalist_count
 
@@ -602,7 +602,7 @@ class LoD(cmd.Cmd):
                         royalist_count = int(self.map["M"].british_tories) + int(self.map["M"].british_regular) + int(self.map["M"].british_fort)
                         royalist_count += int(self.map["M"].indian_war_party) + int(self.map["M"].indian_village) + int(self.map["M"].indian_war_party_active)
 
-                        patriot_count = self.map["M"].patriot_militia + self.map["M"].patriot_fort + self.map["M"].patriot_continental + int(self.map["M"].patriot_militia_active)
+                        patriot_count = int(self.map["M"].patriot_militia) + int(self.map["M"].patriot_fort) + int(self.map["M"].patriot_continental) + int(self.map["M"].patriot_militia_active)
                         print "Massachusetts Rebellion (Patriot & French) combined = %s" % rebellion_count
                         print "Massachusetts (British & Indian) combined = %s" % royalist_count
 
@@ -765,7 +765,7 @@ class LoD(cmd.Cmd):
             if found:
                 location = raw_input("Enter short location code to Muster:").upper()
                 print "ACTION: Move '%s' French Regulars to '%s' " % (self.french_regular_available, location)
-                self.map[location].french_regular += self.french_regular_available
+                self.map[location].french_regular += int(self.french_regular_available)
                 self.map[location].is_muster = True
                 self.french_regular_available = 0
             else:
@@ -780,7 +780,7 @@ class LoD(cmd.Cmd):
                     print ""
                     location = raw_input("Enter short location code to Muster").upper()
                     print "ACTION: Move '%s' French Regulars to '%s' " % (self.french_regular_available, location)
-                    self.map[location].french_regular += self.french_regular_available
+                    self.map[location].french_regular += int(self.french_regular_available)
                     self.map[location].is_muster = True
                     self.french_regular_available = 0
                 else:
@@ -792,8 +792,8 @@ class LoD(cmd.Cmd):
                     if self.french_resources > 0:
                         print "Roll 1D3 for French Resources '%s' to be added to Patriot Resources '%s':" % (self.french_resources, self.patriot_resources)
                         roll = input("ACTION: Enter 1D3 result:")
-                        self.patriot_resources += roll
-                        self.french_resources -= roll
+                        self.patriot_resources += int(roll)
+                        self.french_resources -= int(roll)
                         print "ACTION: Amend Resources French '%s', Patriot '%s'" % (self.french_resources, self.patriot_resources)
                     else:
                         print "RODERIGUE HORTALEZ et CIE not possible as French Resources = 0"
