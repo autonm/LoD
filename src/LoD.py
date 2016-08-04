@@ -125,8 +125,10 @@ class LoD(cmd.Cmd):
         self.map = {}
         self.mapsetup()
 
-        print "french_flow, map, toa, fni, map, status [country], status scenario, status"
-        print ""
+        print "french_flow - use this command to being the Non-Player French Bot"
+        print "map, toa, fni, map - use these commands to update their equivilant"
+        print "patriot, french, indian, british - use these commands to change Resource"
+        print "status [country]. status scenario, status - use these command for status information"
         self.prompt = "Command: "
 
     def postcmd(self, stop, line):
