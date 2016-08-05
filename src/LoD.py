@@ -132,7 +132,7 @@ class LoD(cmd.Cmd):
         print "patriot, french, indian, british          - use these commands to change Resource"
         print "patriot_militia_avail, patriot_cont_avail, patriot_fort_avail - use these commands to update the Patriot's Available"
         print "indian_war_party_avail, indian_village_avail - use these commands to update the Indians Available"
-        print "british_tory_avail, british_regular_avail - use these commands to update the British Available"
+        print "british_tory_avail, british_regular_avail, british_fort_avail - use these commands to update the British Available"
         print "french_regular_avail                     - use these commands to update the French Available"
         print "status [country], status scenario, status - use these commands for status information"
         print ""
@@ -436,13 +436,17 @@ class LoD(cmd.Cmd):
         print ""
         self.indians_war_parties_available = raw_input("Change Indian War Party Available [" + str(self.indians_war_parties_available) + "] Change to [0-100] : ")
 
-    def do_indian_villages_avail(self,rest):
+    def do_indian_village_avail(self,rest):
         print ""
         self.indian_villages_available = raw_input("Change Indian Villages Available [" + str(self.indian_villages_available) + "] Change to [0-100] : ")
 
     def do_british_tory_avail(self,rest):
         print ""
         self.british_tories_available = raw_input("Change British Tory Available [" + str(self.british_tories_available) + "] Change to [0-100] : ")
+
+    def do_british_fort_avail(self,rest):
+        print ""
+        self.british_forts_available = raw_input("Change British Fort Available [" + str(self.british_forts_available) + "] Change to [0-100] : ")
 
     def do_british_regular_avail(self,rest):
         print ""
