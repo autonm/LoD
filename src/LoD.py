@@ -130,6 +130,10 @@ class LoD(cmd.Cmd):
         print "french_flow                               - use this command to being the Non-Player French Bot"
         print "map, toa, fni, map                        - use these commands to update their equivilant"
         print "patriot, french, indian, british          - use these commands to change Resource"
+        print "patriot_militia_avail, patriot_cont_avail, patriot_fort_avail - use these commands to update the Patriot's Available"
+        print "indian_war_party_avail, indian_village_avail - use these commands to update the Indians Available"
+        print "british_tory_avail, british_regular_avail - use these commands to update the British Available"
+        print "french_regular_avail                     - use these commands to update the French Available"
         print "status [country], status scenario, status - use these commands for status information"
         print ""
         self.prompt = "Command: "
@@ -416,6 +420,38 @@ class LoD(cmd.Cmd):
         print ""
         self.indians_resources = raw_input("Change Indian Resources [" + str(self.indians_resources) + "] Change to [0-100] : ")
 
+    def do_patriot_militia_avail(self,rest):
+        print ""
+        self.patriot_militia_available = raw_input("Change French Patriot Militia Available [" + str(self.patriot_militia_available) + "] Change to [0-100] : ")
+
+    def do_patriot_cont_avail(self,rest):
+        print ""
+        self.patriot_cont_available = raw_input("Change French Continental Available [" + str(self.patriot_continental_available) + "] Change to [0-100] : ")
+
+    def do_patriot_fort_avail(self,rest):
+        print ""
+        self.patriot_forts_available = raw_input("Change French Forts Available [" + str(self.patriot_forts_available) + "] Change to [0-100] : ")
+
+    def do_indian_war_party_avail(self,rest):
+        print ""
+        self.indians_war_parties_available = raw_input("Change Indian War Party Available [" + str(self.indians_war_parties_available) + "] Change to [0-100] : ")
+
+    def do_indian_villages_avail(self,rest):
+        print ""
+        self.indian_villages_available = raw_input("Change Indian Villages Available [" + str(self.indian_villages_available) + "] Change to [0-100] : ")
+
+    def do_british_tory_avail(self,rest):
+        print ""
+        self.british_tories_available = raw_input("Change British Tory Available [" + str(self.british_tories_available) + "] Change to [0-100] : ")
+
+    def do_british_regular_avail(self,rest):
+        print ""
+        self.british_regular_available = raw_input("Change British Regular Available [" + str(self.british_regular_available) + "] Change to [0-100] : ")
+
+    def do_french_regular_avail(self,rest):
+        print ""
+        self.french_regular_available = raw_input("Change French Regular Available [" + str(self.french_regular_available) + "] Change to [0-100] : ")
+
     def do_map(self, rest):
         try:
             print "Map Codes:"
@@ -433,23 +469,23 @@ class LoD(cmd.Cmd):
             print 'Control: %s' % self.map[country].control
 
             print "** Active Support = -2, Passive Support = -1, Neutral = 0, Passive Opposition = 1, Active Opposition = 2 **"
-            self.map[country].posture = raw_input("Posture [" + str(self.map[country].posture) + "] Change to [-2,-1,0,1,2] ? ")
-            self.map[country].british_regular = raw_input("British Regulars [" + str(self.map[country].british_regular) + "] Change to [0-100] : ")
-            self.map[country].british_tories = raw_input("British Tories [" + str(self.map[country].british_tories) + "] Change to [0-100] : ")
-            self.map[country].british_fort = raw_input("British Fort [" + str(self.map[country].british_fort) + "] Change to [0-100] : ")
-            self.map[country].patriot_continental = raw_input("Patriots Continental [" + str(self.map[country].patriot_continental) + "] Change to [0-100] : ")
-            self.map[country].patriot_militia = raw_input("Patriots Militia Underground [" + str(self.map[country].patriot_militia) + "] Change to [0-100] : ")
-            self.map[country].patriot_militia_active = raw_input("Patriots Militia Active [" + str(self.map[country].patriot_militia_active) + "] Change to [0-100] : ")
-            self.map[country].patriot_fort = raw_input("Patriots Fort [" + str(self.map[country].patriot_fort) + "] Change to [0-100] : ")
-            self.map[country].indian_war_party = raw_input("Indians War Party Underground [" + str(self.map[country].indian_war_party) + "] Change to [0-100] : ")
-            self.map[country].indian_war_party_active = raw_input("Indians War Party Active [" + str(self.map[country].indian_war_party_active) + "] Change to [0-100] : ")
-            self.map[country].indian_village = raw_input("Indians Villages [" + str(self.map[country].indian_village) + "] Change to [0-100] : ")
-            self.map[country].french_regular = raw_input("French Regulars [" + str(self.map[country].french_regular) + "] Change to [0-100] : ")
-            self.map[country].french_squadron = raw_input("French Blockade [" + str(self.map[country].french_squadron) + "] Change to [0-100] : ")
-            self.map[country].british_howe = raw_input("British Howe [" + str(self.map[country].british_howe) + "] Change to [True/False] : ")
-            self.map[country].patriot_washington = raw_input("Patriots Washington [" + str(self.map[country].patriot_washington) + "] Change to [True/False] : ")
-            self.map[country].indian_brant = raw_input("Indians Brant [" + str(self.map[country].indian_brant) + "] Change to [True/False] : ")
-            self.map[country].propaganda = raw_input("Propaganda [" + str(self.map[country].propaganda) + "] Change to [1 = True; 0 = False] : ")
+            self.map[country].posture = int(input("Posture [" + str(self.map[country].posture) + "] Change to [-2,-1,0,1,2] ? "))
+            self.map[country].british_regular = int(input("British Regulars [" + str(self.map[country].british_regular) + "] Change to [0-100] : "))
+            self.map[country].british_tories = int(input("British Tories [" + str(self.map[country].british_tories) + "] Change to [0-100] : "))
+            self.map[country].british_fort = int(input("British Fort [" + str(self.map[country].british_fort) + "] Change to [0-100] : "))
+            self.map[country].patriot_continental = int(input("Patriots Continental [" + str(self.map[country].patriot_continental) + "] Change to [0-100] : "))
+            self.map[country].patriot_militia = int(input("Patriots Militia Underground [" + str(self.map[country].patriot_militia) + "] Change to [0-100] : "))
+            self.map[country].patriot_militia_active = int(input("Patriots Militia Active [" + str(self.map[country].patriot_militia_active) + "] Change to [0-100] : "))
+            self.map[country].patriot_fort = int(input("Patriots Fort [" + str(self.map[country].patriot_fort) + "] Change to [0-100] : "))
+            self.map[country].indian_war_party = int(input("Indians War Party Underground [" + str(self.map[country].indian_war_party) + "] Change to [0-100] : "))
+            self.map[country].indian_war_party_active = int(input("Indians War Party Active [" + str(self.map[country].indian_war_party_active) + "] Change to [0-100] : "))
+            self.map[country].indian_village = int(input("Indians Villages [" + str(self.map[country].indian_village) + "] Change to [0-100] : "))
+            self.map[country].french_regular = int(input("French Regulars [" + str(self.map[country].french_regular) + "] Change to [0-100] : "))
+            self.map[country].french_squadron = int(input("French Blockade [" + str(self.map[country].french_squadron) + "] Change to [0-100] : "))
+            self.map[country].british_howe = input("British Howe [" + str(self.map[country].british_howe) + "] Change to [True/False] : ")
+            self.map[country].patriot_washington = input("Patriots Washington [" + str(self.map[country].patriot_washington) + "] Change to [True/False] : ")
+            self.map[country].indian_brant = input("Indians Brant [" + str(self.map[country].indian_brant) + "] Change to [True/False] : ")
+            self.map[country].propaganda = int(input("Propaganda [" + str(self.map[country].propaganda) + "] Change to [1 = True; 0 = False] : "))
 
             print ""
             self.control_change_check()
@@ -612,6 +648,7 @@ class LoD(cmd.Cmd):
                             print "Adding 2 Militia to Massachusetts would NOT change to Rebel Control"
                             print "Massachusetts Patriot Count = %s" % patriot_count
 
+                    print ""
                     location = raw_input("Select Patriot Militia Location - [NONE]*Will goto Roderigue Hortalez* or [QC]Quebec [NY]New York [NH]New Hampshire [M]Massachusetts : ").upper()
                     if location.lower() == "none":
                         self.roderigue_hortalez()
@@ -629,8 +666,8 @@ class LoD(cmd.Cmd):
                             self.preparer_la_guerre()
 
                 elif self.patriot_continental_available >= 1:
-                    print "French Agent Mobilization as >=1 Patriot Continental Available, as < 2 Militia available"
-                    location = raw_input("[Q]Quebec [NY]New York [NH]New Hampshire [M]Massachusetts - Select Patriot Militia Location: ").upper()
+                    print "French Agent Mobilization 'Continental' as >=1 Patriot Continental Available, as < 2 Militia available"
+                    location = raw_input("[Q]Quebec [NY]New York [NH]New Hampshire [M]Massachusetts - Select Continental Militia Location: ").upper()
                     self.patriot_continental_available -= 1
                     self.map[location].patriot_continental += 1
 
